@@ -1,7 +1,5 @@
 class PagesController < ApplicationController
-  def index
-  end
-
-  def about
-  end
+	def index
+		render :index
+	end
 end
