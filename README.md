@@ -9,14 +9,19 @@ Weekend lab to practice created a blog app.
 #config/routes.rb
 ```
 Rails.application.routes.draw do
-	get "/signup", to: "users#new"
-	get "/profile", to: "users#show"
-	resources :users, only: [:create]
-	get "/login", to: "sessions#new"
-	get "logout", to: "sessions#destroy"
-	resources :users, only: [:create]
-	resources :thoughts, except: [:index]
-	root "thoughts#index"
+  get "/signup", to: "users#new", as: :signup
+  get "/profile", to: "users#show", as: :profile
+  resources :users, except: [:new, :show]
+
+  get "/login", to: "sessions#new", as: :login
+  get "logout", to: "sessions#destroy", as: :logout
+  resources :users, only: [:create]
+
+  resources :thoughts
+
+  resources :pages, only: [:about]
+
+  root "pages#index"
 end
 ```
 
@@ -56,4 +61,65 @@ end
 
 </body>
 </html>
+```
+
+#app/models/user.rb
+```
+class User < ActiveRecord::Base
+	has_many :thoughts, dependent: :destroy
+end
+```
+
+#app/models/thought.rb
+```
+class Thought < ActiveRecord::Base
+	belongs_to :user
+end
+```
+
+#app/controllers/users_controller.rb
+```
+class UsersController < ApplicationController
+  before_filter :authorize, only: [:show]
+
+  def new
+    # redirect user if already logged in
+    if current_user
+      redirect_to profile_path
+    else
+      @user = User.new
+      render :new
+    end
+  end
+
+  def create
+    # redirect user if already logged in
+    if current_user
+      redirect_to profile_path
+    else
+      user = User.new(user_params)
+      if user.save
+        session[:user_id] = user.id
+        flash[:notice] = "Successfully signed up."
+        # redirect_to "/profile"
+        # refactored with route helpers:
+        redirect_to profile_path
+      else
+        flash[:error] = user.errors.full_messages.join(', ')
+        # redirect_to "/signup"
+        # refactored with route helpers:
+        redirect_to signup_path
+      end
+    end
+  end
+
+  def show
+    render :show
+  end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
+    end
+end
 ```

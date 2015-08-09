@@ -1,29 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'users/new'
-
-  get 'users/create'
-
-  get 'users/update'
-
-  get 'users/edit'
-
-  get 'users/destroy'
-
-  get 'users/index'
-
-  get 'users/show'
-
-  get "/signup", to: "users#new"
-  get "/profile", to: "users#show"
-  resources :users, except: [:new, :show]
-
-  get "/login", to: "sessions#new"
-  get "logout", to: "sessions#destroy"
+  get "/signup", to: "users#new", as: :signup
+  get "/profile", to: "users#show", as: :profile
   resources :users, only: [:create]
 
-  resources :thoughts, except: [:index]
+  get "/login", to: "sessions#new", as: :login
+  get "logout", to: "sessions#destroy", as: :logout
+  resources :sessions, only: [:create]
 
-  root "thoughts#index"
+  resources :thoughts
+
+  resources :pages, only: [:about]
+
+  root "pages#index"
 
 end
