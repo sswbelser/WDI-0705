@@ -23,8 +23,10 @@ end
 #Terminal
 ```$ rake db:create```<br>
 ```$ rake routes```<br>
-```$ rails g controller users new create show```<br>
-```$ rails g controller thoughts 
+```$ rails g controller pages index about```<br>
+```$ rails g controller sessions new create```<br>
+```$ rails g controller users new create update edit destroy index show```<br>
+```$ rails g controller thoughts new create update edit destroy index show```<br>
 ```$ rails g model User first_name last_name email password_digest```<br>
 ```$ rails g model Thought title body```<br>
 
