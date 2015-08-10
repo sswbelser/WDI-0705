@@ -314,7 +314,7 @@ end
 ```gem 'rspec-rails'```
 
 #Terminal
-```bundle install```
+```bundle install```<br>
 ```rails g rspec:model user```
 
 #spec/models/user_spec.rb
