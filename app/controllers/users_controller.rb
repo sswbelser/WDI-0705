@@ -20,13 +20,9 @@ class UsersController < ApplicationController
       if user.save
         session[:user_id] = user.id
         flash[:notice] = "Successfully signed up."
-        # redirect_to "/profile"
-        # refactored with route helpers:
         redirect_to profile_path
       else
         flash[:error] = user.errors.full_messages.join(', ')
-        # redirect_to "/signup"
-        # refactored with route helpers:
         redirect_to signup_path
       end
     end

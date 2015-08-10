@@ -34,11 +34,30 @@ end
 ```$ rails g controller thoughts new create update edit destroy index show```<br>
 ```$ rails g model User first_name last_name email password_digest```<br>
 ```$ rails g model Thought title body```<br>
+```$ rake db:migrate```<br>
+
+#Gemfile
+```gem 'bcrypt', '~> 3.1.7'```
+
+#Terminal
+```$ bundle install```
 
 #app/models/user.rb
 ```
 class User < ActiveRecord::Base
-	has_many :thoughts, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_secure_password
+
+  validates :password, length: { minimum: 6 }, on: :create
+
+  validates :email,
+    presence: true,
+    uniqueness: true,
+    format: {
+      with: /@/,
+      message: "not a valid format"
+    }
+
 end
 ```
 
