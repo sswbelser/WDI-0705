@@ -277,7 +277,7 @@ end
   <div class="form-group">
     <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
   </div>
-  <%= f.submit "Log In", class: "btn btn-primary" %>
+  <%= f.submit "Log In", class: "btn btn-warning" %>
 <% end %>
 <br>
 <p>Don't have an account? <%= link_to "Click here", signup_path%> to sign up.</p>
@@ -297,7 +297,7 @@ end
   <div class="form-group">
     <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", class: "form-control" %>
   </div>
-  <%= f.submit "Sign Up", class: "btn btn-primary" %>
+  <%= f.submit "Sign Up", class: "btn btn-warning" %>
 <% end %>
 <br>
 <p>Already have an account? <%= link_to "Click here", login_path%> to log in.</p>
