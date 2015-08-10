@@ -1,2 +1,14 @@
-<h1>Thoughts#new</h1>
-<p>Find me in app/views/thoughts/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 panel panel-default">
+      <div class="panel-body">
+        <h1>Post A New Thought</h1>
+        <%= form_for @thought do |f| %>
+          <%= f.text_field :title, placeholder: "Thought Title" %><br>
+          <%= f.text_field :body, placeholder: "Enter Thought Here" %><hr>
+          <%= f.submit "Submit" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

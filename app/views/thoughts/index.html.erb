@@ -1,2 +1,26 @@
-<h1>Thoughts#index</h1>
-<p>Find me in app/views/thoughts/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 panel panel-default" style="text-align:center">
+      <div class="panel-body">
+        <h1>Scattered Thoughts</h1>
+        <h4>share your thoughts with the world!</h4>
+        <br>
+        <% if current_user %>
+          <%= link_to "Add A New Thought", new_thought_path %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <% @thoughts.each do |thought| %>
+        <div class="col-sm-6 col-sm-offset-3 panel panel-default" style="text-align:center">
+          <div class="panel-body thoughts">
+            <br>
+              <h4><%= thought.title %></h4>
+              <p> "<%= thought.body %>" <%= link_to "View", thought_path(thought) %></p>
+              <br>
+          </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,2 +1,16 @@
-<h1>Thoughts#show</h1>
-<p>Find me in app/views/thoughts/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3 panel panel-default">
+      <div class="panel-body">
+        <h1><%= @thought.title %></h1>
+        <p>"<%= @thought.body %>"</p>
+
+        <% if current_user && current_user.thoughts.include?(@thought) %>
+          <%= link_to "Edit", edit_thought_path(@thought) %>
+          <br>
+          <%= link_to "Delete", @thought, method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,19 @@
 <h3>Welcome, <%= current_user.email %>!</h3>
 <hr>
 <p>You are currently logged in. <%= link_to "Log out", logout_path %></p>
+
+<div class="container">
+	<div class="row">
+	    <% if current_user.thoughts.any?  %>
+          <h3>My Scattered Thoughts</h3>
+           <% current_user.thoughts.each do |thought| %>
+            <h5><%= thought.movie %> (<%= thought.year %>)</h5>
+            <p>"<%= thought.quote %>" <%= link_to "View", thought_path(thought) %></p>
+            <br>
+           <% end %>
+        <% else %>
+          <h4>You don't have any thoughts, yet!</h4>
+        <% end %>
+         <%= link_to "Add A New Thought", new_thought_path %>
+      </div>
+    </div>
